@@ -12,12 +12,12 @@ bool iniciado = false;
 Carro* Fabrica::crearCarroAlt() {
 	int id = rand() % 500 + 1;
 	string modelo = modeloAlt();
-	int anio = rand() % 16 + 2000; // desde 2000-2025
+	int anio = rand() % 16 + 2010; // desde 2010-2025
 	string color = colorAlt();
 	string estadoMotor = estadoMotorAlt();
 
 	Carro* carro = new Carro(id, modelo, anio, color,estadoMotor);
-	int defectuosoNum = rand() % 5;
+	int defectuosoNum = rand() % 5; // 0-4 defectos
 	for (int i = 0; i < defectuosoNum; i++) {
 		string descripcionDefecto = DefectosAlt();
 		Defecto* defecto = new Defecto(descripcionDefecto);
@@ -248,6 +248,7 @@ void Fabrica::cargarCarros() {
 	cout << "Carros cargados correctamente." << endl;
 }
 
+// bubblesort para ordenar carros por modelo
 void Fabrica::ordenar(vector<Carro*>& carros2) {
 	int num = carros2.size();
 	for (int i = 0; i < num - 1; i++) {
