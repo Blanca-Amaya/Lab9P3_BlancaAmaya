@@ -20,9 +20,11 @@ void menu() {
         cin >> opcion;
         switch (opcion) {
         case 1:
-
+            fabrica->agregarCarroNuevo();
+            break;
         case 2:
-
+            fabrica->listarTodos();
+            break;
         case 3:
 
         case 4:
@@ -32,13 +34,16 @@ void menu() {
         case 6:
 
         case 7:
-
+            cout << "Saliendo..." << endl;
+            resp = false;
+            break;
         default:
-
+            cout << "Opcion invalida" << endl;
+            break;
         }
     }
 }
 
 int main() {
-    
+    menu();
 }

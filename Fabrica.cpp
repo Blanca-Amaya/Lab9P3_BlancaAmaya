@@ -107,6 +107,105 @@ void Fabrica::listarSinDefectos() const {
 	}
 }
 
+void Fabrica::listarConDefectos() const {
+	vector <Carro*> conDefectos;
+	for (int i = 0; i < carros.size(); i++) {
+		if (carros[i]->defectoTiene()) {
+			conDefectos.push_back(carros[i]);
+		}
+	}
+	if (conDefectos.empty()) {
+		cout << "No hay carros con defectos" << endl;
+		return;
+	}
+
+	vector <Carro*> ordena = conDefectos;
+	Fabrica temporal;
+	temporal.ordenar(ordena);
+	cout << "--- Carros con defectos ---" << endl;
+	for (int i = 0; i < ordena.size(); i++) {
+		cout << ordena[i]->mostrarinformacion() << endl;
+	}
+}
+
+void Fabrica::guardarCarros() {
+	if (carros.empty()) {
+		cout << "No hay carros guardados" << endl;
+		return;
+	}
+	
+	ofstream archivo("Carros.txt");
+	if (!archivo.is_open()) {
+		cout << "No se pudo abrir el archivo" << endl;
+		return;
+	}
+	vector <Carro*> sinDefectos;
+	vector <Carro*> conDefectos;
+
+	for (int i = 0; i < carros.size(); i++) {
+		if (carros[i]->defectoTiene()) {
+			conDefectos.push_back(carros[i]);
+		}
+		else {
+			sinDefectos.push_back(carros[i]);
+		}
+	}
+	archivo << "CARROS SIN DEFECTOS\n";
+	for (int i = 0; i < sinDefectos.size(); i++) {
+		archivo << sinDefectos[i]->informacionArchivo() << endl;
+	}
+	archivo << "\nCARROS CON DEFECTOS\n";
+	for (int i = 0; i < conDefectos.size(); i++) {
+		archivo << conDefectos[i]->informacionArchivo() << endl;
+	}
+	archivo.close();
+	cout << endl;
+	cout << "Carros guardados correctamente." << endl;
+}
+
+void Fabrica::cargarCarros() {
+	ifstream archivo("Carros.txt");
+	if (!archivo.is_open()) {
+		cout << "No se puede abrir el archivo" << endl;
+		return;
+	}
+
+	string linea;
+	getline(archivo, linea);
+	bool sinDefectos2 = false;
+	bool conDefectos2 = false;
+	int numCargados = 0;
+	while (getline(archivo, linea)) {
+		if (linea.empty()) {
+			continue;
+		}
+		// para identificar las secciones del archivo 
+		if (linea == "CARROS SIN DEFECTOS") {
+			sinDefectos2 = true;
+			conDefectos2 = false;
+			continue;
+		}
+		else if (linea == "CARROS CON DEFECTOS") {
+			sinDefectos2 = false;
+			conDefectos2 = true;
+			continue;
+		}
+		// procesando linea que contenga datos de un carro
+		if (sinDefectos2 || conDefectos2) {
+			stringstream ss(linea);
+			string dato;
+			vector <string> datos_carro;
+			while (getline(ss, dato, ',')) {
+				// En caso que haya espacios
+				if (!dato.empty() && dato[0] == ' ') {
+					dato = dato.substr(1);
+				}
+				datos_carro.push_back(dato);
+			}
+		}
+	}
+}
+
 void Fabrica::ordenar(vector<Carro*>& carros2) {
 	int num = carros2.size();
 	for (int i = 0; i < num - 1; i++) {
