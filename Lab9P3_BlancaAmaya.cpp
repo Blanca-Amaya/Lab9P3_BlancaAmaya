@@ -42,6 +42,8 @@ void menu() {
             break;
         }
     }
+    delete fabrica;
+    fabrica = nullptr;
 }
 
 int main() {

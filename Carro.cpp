@@ -6,7 +6,10 @@ Carro::Carro(int id2, string modelo2, int anio2, string color2, string estadoMot
 
 Carro::~Carro() {
 	for (int i = 0; i < defectos.size(); i++) {
-		delete defectos[i];
+		if (defectos[i] != nullptr) {
+			delete defectos[i];
+			defectos[i] = nullptr;
+		}
 	}
 	defectos.clear();
 }

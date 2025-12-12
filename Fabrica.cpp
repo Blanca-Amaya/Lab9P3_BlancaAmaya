@@ -12,7 +12,7 @@ bool iniciado = false;
 Carro* Fabrica::crearCarroAlt() {
 	int id = rand() % 500 + 1;
 	string modelo = modeloAlt();
-	int anio = rand() % 16 + 2010;
+	int anio = rand() % 16 + 2000; // desde 2000-2025
 	string color = colorAlt();
 	string estadoMotor = estadoMotorAlt();
 
@@ -58,7 +58,11 @@ Fabrica::Fabrica() {
 
 Fabrica::~Fabrica() {
 	for (int i = 0; i < carros.size(); i++) {
-		delete carros[i];
+		if (carros[i] = nullptr) {
+			delete carros[i];
+			carros[i] = nullptr;
+		}
+		
 	}
 	carros.clear();
 }
