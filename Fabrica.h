@@ -7,6 +7,14 @@ using namespace std;
 class Fabrica {
 private:
 	vector <Carro*> carros;
+
+	// metodos
+	Carro* crearCarroAlt();
+	string modeloAlt();
+	string colorAlt();
+	string estadoMotorAlt();
+	string DefectosAlt();
+
 public:
 	Fabrica();
 	~Fabrica();
@@ -20,5 +28,8 @@ public:
 	void listarSinDefectos() const;
 	void listarConDefectos() const;
 	void guardarCarros();
+	void cargarCarros();
+
+	void ordenar(vector<Carro*>& carros2);
 
 };

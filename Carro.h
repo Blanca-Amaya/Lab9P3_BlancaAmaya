@@ -36,5 +36,7 @@ public:
 	void agregarDefecto(Defecto* defecto);
 	string mostrarinformacion() const;
 	string informacionArchivo() const;
+
+	bool defectoTiene() const;
 };
 
