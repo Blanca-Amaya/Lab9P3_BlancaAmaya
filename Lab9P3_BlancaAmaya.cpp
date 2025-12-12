@@ -1,5 +1,7 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
+#include <ctime>
+#include <locale>
 #include "Fabrica.h"
 using namespace std;
 
@@ -47,5 +49,6 @@ void menu() {
 }
 
 int main() {
+    setlocale(LC_ALL, "spanish");
     menu();
 }

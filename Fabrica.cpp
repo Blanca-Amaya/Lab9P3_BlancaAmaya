@@ -58,7 +58,7 @@ Fabrica::Fabrica() {
 
 Fabrica::~Fabrica() {
 	for (int i = 0; i < carros.size(); i++) {
-		if (carros[i] = nullptr) {
+		if (carros[i] != nullptr) {
 			delete carros[i];
 			carros[i] = nullptr;
 		}
@@ -101,7 +101,7 @@ void Fabrica::listarSinDefectos() const {
 		return;
 	}
 
-	// ordenando
+	// ordenando por modelo
 	vector <Carro*> ordena = sinDefectos;
 	Fabrica temporal;
 	temporal.ordenar(ordena);
@@ -123,6 +123,7 @@ void Fabrica::listarConDefectos() const {
 		return;
 	}
 
+	// ordenando por modelo
 	vector <Carro*> ordena = conDefectos;
 	Fabrica temporal;
 	temporal.ordenar(ordena);
@@ -143,6 +144,7 @@ void Fabrica::guardarCarros() {
 		cout << "No se pudo abrir el archivo" << endl;
 		return;
 	}
+	// separar categorias; sin o con defectos
 	vector <Carro*> sinDefectos;
 	vector <Carro*> conDefectos;
 
@@ -179,6 +181,13 @@ void Fabrica::cargarCarros() {
 	bool sinDefectos2 = false;
 	bool conDefectos2 = false;
 	int numCargados = 0;
+
+	if (getline(archivo, linea)) {
+		if (linea == "CARROS SIN DEFECTOS") {
+			sinDefectos2 = true;
+		}
+	}
+
 	while (getline(archivo, linea)) {
 		if (linea.empty()) {
 			continue;
@@ -199,15 +208,44 @@ void Fabrica::cargarCarros() {
 			stringstream ss(linea);
 			string dato;
 			vector <string> datos_carro;
-			while (getline(ss, dato, ',')) {
-				// En caso que haya espacios
+			while (getline(ss, dato, ',')) { // separa datos por comas
+				// En caso que haya espacios (al inicio)
 				if (!dato.empty() && dato[0] == ' ') {
 					dato = dato.substr(1);
 				}
 				datos_carro.push_back(dato);
 			}
+
+			if (datos_carro.size() >= 5) {
+				int id = stoi(datos_carro[0]);
+				string modelo = datos_carro[1];
+				int anio = stoi(datos_carro[2]);
+				string color = datos_carro[3];
+				string estadoMotor = datos_carro[4];
+				Carro* nuevoCarro = new Carro(id, modelo, anio, color, estadoMotor);
+
+				// para ver si hay defectos
+				if (datos_carro.size() > 5 && conDefectos2) {
+					string defectos2 = datos_carro[5];
+					stringstream sd(defectos2);
+					string descripcionDefecto;
+
+					// quitando espacios al inicio / y que no este vacio
+					while (getline(sd, descripcionDefecto, '|')) {
+						if (!descripcionDefecto.empty() && descripcionDefecto[0] == ' ') {
+							descripcionDefecto = descripcionDefecto.substr(1);
+						}
+						Defecto* defecto = new Defecto(descripcionDefecto);
+						nuevoCarro->agregarDefecto(defecto);
+					}
+				}
+				carros.push_back(nuevoCarro);
+				numCargados++;
+			}
 		}
 	}
+	archivo.close();
+	cout << "Carros cargados correctamente." << endl;
 }
 
 void Fabrica::ordenar(vector<Carro*>& carros2) {
