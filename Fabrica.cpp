@@ -32,8 +32,8 @@ string Fabrica::modeloAlt() {
 }
 
 string Fabrica::colorAlt() {
-	string colores[] = { "Plateado", "Negro", "Gris", "Verde", "Blanco", "Rojo", "Azul" };
-	int pos = rand() & 7;
+	string colores[] = { "Crema", "Negro", "Gris", "Verde", "Blanco", "Rojo", "Azul" };
+	int pos = rand() % 7;
 	return colores[pos];
 }
 
@@ -44,7 +44,7 @@ string Fabrica::estadoMotorAlt() {
 }
 
 string Fabrica::DefectosAlt() {
-	string defectos[] = { "Sensor dañado", "Problema electrico", "Fallo en frenos", "Fuga de aceite", "Bateria defectuosa", "Ruedas dañada"};
+	string defectos[] = { "Sensor dañado", "Problema electrico", "Fallo en frenos", "Fuga de aceite", "Bateria defectuosa", "Desajuste en suspensión"};
 	int pos = rand() % 6;
 	return defectos[pos];
 }
@@ -177,7 +177,6 @@ void Fabrica::cargarCarros() {
 	}
 
 	string linea;
-	getline(archivo, linea);
 	bool sinDefectos2 = false;
 	bool conDefectos2 = false;
 	int numCargados = 0;
@@ -240,7 +239,7 @@ void Fabrica::cargarCarros() {
 					}
 				}
 				carros.push_back(nuevoCarro);
-				numCargados++;
+				numCargados++; // solo para la cantidad de cargados 
 			}
 		}
 	}
@@ -252,7 +251,7 @@ void Fabrica::cargarCarros() {
 void Fabrica::ordenar(vector<Carro*>& carros2) {
 	int num = carros2.size();
 	for (int i = 0; i < num - 1; i++) {
-		for (int j = 0; j < num - 1; j++) {
+		for (int j = 0; j < num - i - 1; j++) {
 			if (carros2[j]->getModelo() > carros2[j + 1]->getModelo()) {
 				Carro* tempo = carros2[j];
 				carros2[j] = carros2[j + 1];
