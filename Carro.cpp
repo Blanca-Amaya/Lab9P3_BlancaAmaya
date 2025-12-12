@@ -70,22 +70,24 @@ string Carro::mostrarinformacion() const {
 		for (int i = 0; i < defectos.size(); i++) {
 			s << defectos[i]->getDescripcion();
 			if (i < defectos.size() - 1) {
-				s << " | ";
+				s << " | "; // separacion por defecto
 			}
 		}
 	}
-	return s.str();
+	return s.str(); // stringstream -> string
 }
 
 string Carro::informacionArchivo() const {
 	stringstream s;
 	s << id << ", " << modelo << ", " << anio << ", " << color << ", " << estadoMotor;
+	
+	
 	if (defectos.size()) {
 		s << ", ";
 		for (int i = 0; i < defectos.size(); i++) {
 			s << defectos[i]->getDescripcion();
 			if (i < defectos.size() - 1) {
-				s << " | ";
+				s << " | "; // separador por defecto
 			}
 		}
 	}

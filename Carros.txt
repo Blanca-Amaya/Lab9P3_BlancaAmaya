@@ -1,7 +1,5 @@
 CARROS SIN DEFECTOS
+142, Yaris, 2010, Negro, Defectuoso
 
 CARROS CON DEFECTOS
-470, Rav4, 2024, Rojo, Defectuoso, Problema eléctrico
-404, Rav4, 2013, Blanco, Bueno, Fallo en frenos|Sensor dañado|Sensor dañado|Problema eléctrico
-160, Yaris, 2012, Blanco, Regular, Sensor dañado|Problema eléctrico|Problema eléctrico
-376, Yaris, 2016, Rojo, Defectuoso, Problema eléctrico|Problema eléctrico
+99, Rav4, 2012, Negro, Regular, Sensor dañado | Sensor dañado | Problema electrico | Problema electrico

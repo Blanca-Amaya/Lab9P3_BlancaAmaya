@@ -7,12 +7,12 @@ using namespace std;
 
 class Carro {
 private:
-	int id;
-	string modelo;
-	int anio;
+	int id; // 1-500
+	string modelo; // corolla, yaris, etc
+	int anio; // 2010-2025
 	string color;
-	string estadoMotor;
-	vector <Defecto*> defectos;
+	string estadoMotor; // excelente, bueno, regular, defectuoso
+	vector <Defecto*> defectos; // lista de defectos del carro; puede quedarse vacia
 public:
 	Carro(int id2, string modelo2, int anio2, string color2, string estadoMotor2);
 	~Carro();

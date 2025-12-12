@@ -8,12 +8,13 @@ class Fabrica {
 private:
 	vector <Carro*> carros;
 
-	// metodos
-	Carro* crearCarroAlt();
-	string modeloAlt();
-	string colorAlt();
-	string estadoMotorAlt();
-	string DefectosAlt();
+	// metodos extras
+	Carro* crearCarroAlt(); // -> crea un carro con los atributos aleatorios
+	string modeloAlt(); // genera un modelo aleatorio usando el arreglo con datos ya incluido
+	string colorAlt(); // genera un color alt
+	string estadoMotorAlt(); // genera el estado del motor (bueno, regular, etc)
+	string DefectosAlt(); // descripcion aleatoria
+	void ordenar(vector<Carro*>& carros2);
 
 public:
 	Fabrica();
@@ -30,6 +31,6 @@ public:
 	void guardarCarros();
 	void cargarCarros();
 
-	void ordenar(vector<Carro*>& carros2);
+	
 
 };
